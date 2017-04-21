@@ -12,7 +12,6 @@ module.exports = function(env = {}){
       jsLoaders   = [];
   
   if(env.production){
-    //compress js in production environment
     plugins.push(
       new webpack.optimize.UglifyJsPlugin({
         compress: {
@@ -24,7 +23,6 @@ module.exports = function(env = {}){
   }
   
   if(fs.existsSync('./.babelrc')){
-    //use babel
     let babelConf = JSON.parse(fs.readFileSync('.babelrc'));
     jsLoaders.push({
       loader: 'babel-loader',
