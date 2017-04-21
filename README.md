@@ -6,13 +6,13 @@
 ## 安装
 
 ```bash
-npm i monitortag
+npm i monitortag --save
 ```
 
 ## 使用
 
 ```js
-const monitor = require('monitortag');
+import monitor from 'monitortag'
 ```
 
 ## 传参 actionTag 有几种形式

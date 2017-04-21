@@ -16,10 +16,10 @@ function monitorMiddleWare(c){
                  });
                  }*/
                 monitor.send({
-                    actionTag:action.type,
-                    targetTag:{
-                        name:123,
-                        age:4545
+                    actionTag: action.type,
+                    targetTag: {
+                        name: 123,
+                        age: 4545
                     }
                 });
                 return next(action);
@@ -28,5 +28,6 @@ function monitorMiddleWare(c){
     }
 }
 
-module.exports = monitorMiddleWare;
+exports.default = monitorMiddleWare;
+module.exports = exports['default'];
 
