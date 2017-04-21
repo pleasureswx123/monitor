@@ -9,6 +9,20 @@
 npm i monitortag --save
 ```
 
+## 测试
+
+http://localhost:8080/
+
+```bash
+npm start
+```
+
+## 生成库 Monitortag 文件
+
+```bash
+npm run deploy
+```
+
 ## 使用
 
 ```js
