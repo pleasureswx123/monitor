@@ -3,6 +3,7 @@
 根据dispatch - > action 中的参数 tag 进行埋点
 
 
+
 ## 安装
 
 ```bash
@@ -35,8 +36,8 @@ npm run deploy
 
 ## 传参 actionTag 有几种形式
 
-- dom元素的属性
-- send参数对象的属性
+- dom元素的属性 `data-monitor`
+- send参数对象的属性 
 
 ## 使用
 
