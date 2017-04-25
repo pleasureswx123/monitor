@@ -23,21 +23,20 @@ npm start
 npm run deploy
 ```
 
-## action.type
-```bash
-action.type = 'MONITOR_BEHAVIOR'
 
-export function fetchMonitor(opt) {
-    return (dispatch, getState) => {
-        dispatch({
-            type: ActionType.MONITOR_BEHAVIOR,
-            data: { ...opt }
-        });
-    };
-}
+## 自动获取 uid cid
+> uid  cid  必需
+> 如没有获取到 不发请求
 
-```
+## 参数常见配置
+> actionTag 埋点名称
+> targetTag 扩展信息
 
+
+## 传参 actionTag 有几种形式
+
+- dom元素的属性
+- send参数对象的属性
 
 ## 使用
 
@@ -45,10 +44,6 @@ export function fetchMonitor(opt) {
 import monitor from 'monitortag'
 ```
 
-## 传参 actionTag 有几种形式
-
-- dom元素的属性
-- send参数对象的属性
 
 ### 在中间件中使用
 
@@ -60,21 +55,41 @@ let store = createStore(
     )
 ```
 
-### 在页面中其它地方使用
+### 在页面中走action形式，type固定 `@@monitor`，如：
+
+```js
+function fetchMonitor(ev){
+    let target = ev.target;
+    let actionTag = target.getAttribute('data-monitor');
+    if(target.tagName === 'A' && actionTag){
+        this.props.dispatch({
+            type:'@@monitor',
+            data:{
+                actionTag
+            }
+        })
+    }
+}
+```
+
+### 在页面中其它地方直接发请求，不走action形式，actionTag 埋点名称 必需值，如：
 
 ```js
 monitor.send({
-    actionTag:'rqwrqrqrqrqwrqwr',
-    targetTag:{
+    actionTag:'rqwrqrqrqrqwrqwr',  //埋点名称
+    targetTag:{  //扩展信息
         name:123,
         age:4545
     }
 });
 ```
 
-### DOM元素bind事件使用
+### DOM元素bind事件使用，不走action
 
-```js
+- 若参数 中有 actionTag 埋点名称，则无需要 target
+- 若参数 中没有 actionTag 埋点名称，则通过 event.target 查其属性本身的 attr:'data-monitor'，若e.target没查找到，会向上逐层查找
+
+```js 
 document.addEventListener('mousedown', function(e){
     app.send({
         target:e.target,
@@ -114,7 +129,9 @@ let basePars = (function(){
     logImgSrc: '',
     // attr:'data-collect',
     attr: 'class',
-    topic: 'web.action'
+    topic: 'web.action'，
+    ipSrc:'http://pv.sohu.com/cityjson?ie=utf-8',
+    ip:true
 }
 ```
 

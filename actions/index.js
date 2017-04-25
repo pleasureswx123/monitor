@@ -4,7 +4,7 @@ const fetchMonitor = function (opt) {
     return (dispatch, getState) => {
         dispatch({
             type: ActionType.MONITOR_BEHAVIOR,
-            data: { ...opt }
+            data: opt
         });
     };
 };
