@@ -1,4 +1,5 @@
 const monitor = require('./lib/monitor');
+const ActionType = require('./actions/ActionType');
 
 function monitorMiddleWare(c){
     return function(_ref){
@@ -6,22 +7,11 @@ function monitorMiddleWare(c){
         var getState = _ref.getState;
         return function(next){
             return function(action){
-                /*if(action.type=='REQUEST_FRIENDSLIST'){
-                 monitor.send({
-                 actionTag:'rqwrqrqrqrqwrqwr',
-                 targetTag:{
-                 name:123,
-                 age:4545
-                 }
-                 });
-                 }*/
-                monitor.send({
-                    actionTag: action.type,
-                    targetTag: {
-                        name: 123,
-                        age: 4545
-                    }
-                });
+                if(action.type==ActionType.MONITOR_BEHAVIOR || action.data){
+                    monitor.send({
+                        ...action.data
+                    });
+                }
                 return next(action);
             }
         }

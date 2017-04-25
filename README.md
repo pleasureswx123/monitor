@@ -23,6 +23,22 @@ npm start
 npm run deploy
 ```
 
+## action.type
+```bash
+action.type = 'MONITOR_BEHAVIOR'
+
+export function fetchMonitor(opt) {
+    return (dispatch, getState) => {
+        dispatch({
+            type: ActionType.MONITOR_BEHAVIOR,
+            data: { ...opt }
+        });
+    };
+}
+
+```
+
+
 ## 使用
 
 ```js
